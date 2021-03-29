@@ -1,7 +1,7 @@
 # Project Description
 A Black-Scholes-Merton pricing engine using Fortran 95.
 
-## Project Aim
+# Project Aims
 The program will take as input the stock price, strike price, time to maturity, underlying volatility and
 risk-free interest rate.
 
