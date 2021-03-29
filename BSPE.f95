@@ -2,7 +2,8 @@ program BSPE
    implicit none
    ! BS Variables & Input
    real :: S_0, K, T, sigma, r
-   real :: BS_CALCULATE, Phi
+   real :: BS_CALCULATE, PCparity, Phi
+   real :: C_0, P_0
 
    print*, "Input order: stock price ($), strike price ($), time to maturity (years), voltality (rate), interest rate."
 
@@ -10,7 +11,10 @@ program BSPE
    read*, S_0, K, T, sigma, r
 
    ! Output European call option price
-   print*, "Price of European call option: ", BS_CALCULATE(S_0, K, T, sigma, r)
+   C_0 = BS_CALCULATE(S_0, K, T, sigma, r)
+   print*, "Price of European call option: ", C_0
+   P_0 = PCparity(C_0, K, r, T, S_0)
+   print*, "Price of European put option: ", P_0
 
 end program BSPE
 
@@ -39,3 +43,10 @@ function Phi(z)
       Phi = Phi + ( ((-1.0)**k) * (z** (2.0*k+1.0)) ) / ( (2.0**k) * gamma(real(k+1)) * (2.0*k+1.0) ) * (1.0/sqrt(2*pi))
    end do
 end function Phi
+
+function PCparity(C_0, K, r, T, S_0)
+   implicit none
+   real :: PCparity, C_0, K, r, T, S_0
+
+   PCparity = C_0 + K * exp(-r*T) - S_0
+end function PCparity
