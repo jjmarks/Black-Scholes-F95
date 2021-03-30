@@ -13,6 +13,7 @@ program BSPE
    ! Output European call option price
    C_0 = BS_CALCULATE(S_0, K, T, sigma, r)
    print*, "Price of European call option: ", C_0
+   ! Output European put option price
    P_0 = PCparity(C_0, K, r, T, S_0)
    print*, "Price of European put option: ", P_0
 
